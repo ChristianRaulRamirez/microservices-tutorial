@@ -1,0 +1,12 @@
+server:
+  port: 8081
+spring:
+  cloud: 
+    config:
+      server:
+        git:
+          default-label: config-server
+          uri: https://github.com/ChristianRaulRamirez/microservices-tutorial
+          search-paths: congif-data
+  application:
+    name: config-service
