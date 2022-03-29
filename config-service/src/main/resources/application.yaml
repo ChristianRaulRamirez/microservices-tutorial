@@ -7,6 +7,6 @@ spring:
         git:
           default-label: eureka
           uri: https://github.com/ChristianRaulRamirez/microservices-tutorial
-          search-paths: congif-data
+          search-paths: config-data
   application:
     name: config-service
