@@ -1,6 +1,6 @@
 spring:
   application:
-    name: carro-servicio
+    name: carro-service
   cloud:
     config:
       enabled: true
