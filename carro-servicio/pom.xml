@@ -9,10 +9,10 @@
 		<version>2.5.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.servicio.usuario</groupId>
-	<artifactId>servicio-usuario</artifactId>
+	<groupId>com.servicio.carro</groupId>
+	<artifactId>carro-servicio</artifactId>
 	<version>1.0</version>
-	<name>servicio-usuario</name>
+	<name>carro-servicio</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
