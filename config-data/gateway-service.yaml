@@ -20,6 +20,8 @@ spring:
           uri: lb://usuario-service
           predicates:
             - Path=/usuario/**
+          filters:
+            - AuthFilter
         - id: carro-service
           uri: lb://carro-service
           predicates:
@@ -28,3 +30,7 @@ spring:
           uri: lb://bicicleta-service
           predicates:
             - Path=/bicicleta/**
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
