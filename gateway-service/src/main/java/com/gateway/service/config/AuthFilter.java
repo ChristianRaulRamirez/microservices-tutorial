@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.Builder;
 import org.springframework.web.server.ServerWebExchange;
 
+import com.gateway.service.dto.RequestDTO;
 import com.gateway.service.dto.TokenDTO;
 
 import reactor.core.publisher.Mono;
@@ -40,6 +41,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config>{
 			return webClient.build()
 					.post()
 					.uri("http://auth-service/auth/validate?token=" + chunks[1])
+					.bodyValue(new RequestDTO(exchange.getRequest().getPath().toString(), exchange.getRequest().getMethod().toString()))
 					.retrieve().bodyToMono(TokenDTO.class)
 					.map(t -> {
 						t.getToken();

@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.auth.service.dto.AuthUserDTO;
+import com.auth.service.dto.NewUserDTO;
+import com.auth.service.dto.RequestDTO;
 import com.auth.service.dto.TokenDTO;
 import com.auth.service.entity.AuthUser;
 import com.auth.service.repository.AuthUserRepository;
@@ -24,31 +26,30 @@ public class AuthUserService {
 	@Autowired
 	private JwtProvider jwtProvider;
 	
-	public AuthUser save(AuthUserDTO dto) {
+	public AuthUser save(NewUserDTO dto) {
 		Optional<AuthUser> user = authUserRepository.findByUserName(dto.getUserName());
 		if(user.isPresent()) {
 			return null;
 		}
 		String password = passwordEncoder.encode(dto.getPassword());
-		AuthUser authUser = new AuthUser(dto.getUserName(),password);
+		AuthUser authUser = new AuthUser(dto.getUserName(),password,dto.getRole());
 		return authUserRepository.save(authUser);
 	}
 	
 	public TokenDTO login(AuthUserDTO dto) {
 		Optional<AuthUser> user = authUserRepository.findByUserName(dto.getUserName());
-		if(user.isPresent()) {
+		if(!user.isPresent()) {
 			return null;
 		}
 		
 		if(passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) { //si coinciden las passwords
 			return new TokenDTO(jwtProvider.createToken(user.get()));
 		}
-		
 		return null;
 	}
 
-	public TokenDTO validate(String token) {
-		if(!jwtProvider.validate(token)) {
+	public TokenDTO validate(String token,RequestDTO dto) {
+		if(!jwtProvider.validate(token,dto)) {
 			return null;
 		}
 		String username = jwtProvider.getUserNameFromToken(token);

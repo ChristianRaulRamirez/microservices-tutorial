@@ -11,9 +11,10 @@ public class AuthUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String userName;
 	private String password;
+	private String role;
 
 	public int getId() {
 		return id;
@@ -38,7 +39,15 @@ public class AuthUser {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	public AuthUser(String userName, String password) {
 		super();
 		this.userName = userName;
@@ -52,6 +61,21 @@ public class AuthUser {
 		this.password = password;
 	}
 
+	public AuthUser(int id, String userName, String password, String role) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		this.role = role;
+	}
+
+	public AuthUser(String userName, String password, String role) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.role = role;
+	}
+	
 	public AuthUser() {
 		super();
 	}
